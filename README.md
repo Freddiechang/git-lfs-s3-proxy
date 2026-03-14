@@ -65,13 +65,31 @@ To host your own instance of the proxy:
 
 ### Find your LFS server URL
 
-We now have everything we need to build the server URL for Git LFS. The format for the URL is
+We now have everything we need to build the server URL for Git LFS. The format for the URL is:
 
-    https://<ACCESS_KEY_ID>:<SECRET_ACCESS_KEY>@<INSTANCE>/<ENDPOINT>/<BUCKET>
+`https://<ACCESS_KEY_ID>:<SECRET_ACCESS_KEY>@<INSTANCE>/<ENDPOINT>/<BUCKET>`
 
-where `<ACCESS_KEY_ID>` and `<SECRET_ACCESS_KEY>` are the first and second values from [Create an access key](#create-an-access-key), `<ENDPOINT>` is the S3-compatible API endpoint for your object store, and `<BUCKET>` is the name of the bucket from [Create a bucket](#create-a-bucket). For example, the LFS server URL for a Cloudflare R2 bucket `my-site` with access key ID `ed41437d53a69dfc` and secret access key `dc49cbe38583b850a7454c89d74fcd51` created by a Cloudflare user with [account ID](https://developers.cloudflare.com/fundamentals/get-started/basic-tasks/find-account-and-zone-ids/) `7795d95f5507a0c89bd1ed3de8b57061` using the canonical proxy instance `git-lfs-s3-proxy.pages.dev` would be
+**Field Breakdown:**
 
-    https://ed41437d53a69dfc:dc49cbe38583b850a7454c89d74fcd51@git-lfs-s3-proxy.pages.dev/7795d95f5507a0c89bd1ed3de8b57061.r2.cloudflarestorage.com/my-site
+* **`<ACCESS_KEY_ID>`**: The first value from [Create an access key](#create-an-access-key).
+* **`<SECRET_ACCESS_KEY>`**: The second value from [Create an access key](#create-an-access-key).
+* **`<INSTANCE>`**: Your Cloudflare worker URL or your custom URL for this worker.
+* **`<ENDPOINT>`**: The S3-compatible API endpoint for your object store (e.g., `s3.us-west-000.backblazeb2.com`).
+* **`<BUCKET>`**: The name of the bucket from [Create a bucket](#create-a-bucket).
+
+---
+
+**Example:**
+
+For a Cloudflare R2 bucket `my-site` with:
+* **Access Key ID**: `ed41437d53a69dfc`
+* **Secret Access Key**: `dc49cbe38583b850a7454c89d74fcd51`
+* **Account ID**: `7795d95f5507a0c89bd1ed3de8b57061`
+* **Proxy Instance**: `git-lfs-s3-proxy.pages.dev`
+
+The resulting LFS server URL would be:
+
+`https://ed41437d53a69dfc:dc49cbe38583b850a7454c89d74fcd51@git-lfs-s3-proxy.pages.dev/7795d95f5507a0c89bd1ed3de8b57061.r2.cloudflarestorage.com/my-site`
 
 ### Fetch existing LFS objects
 
